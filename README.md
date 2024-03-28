@@ -14,7 +14,7 @@ Steps to create an AIX vm emulated under Qemu Linux Virtual Machine
 
 ## 2 - OS version and QEMU
 
-### I am using fedora 41 alpha and qemu version 8   ( that combination worked  well with AIX 7.2  the 7.1 not so much )
+### I am using fedora 41 alpha and qemu version 8   (That combination worked  well with AIX 7.2  the 7.1 not so much)
 
   	root@ryzen9:/mnt# rpm -qa | grep -i qemu-ppc
   	root@ryzen9:/mnt# rpm -qa | grep -i qemu | grep -i ppc
