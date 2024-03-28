@@ -47,12 +47,12 @@ root@host:/dir#
 
 ## 3 -  Create a file to be the DISK of your AIX system
 ```
-root@host:/dir#qemu-img create -f  qcow2  hdisk0.qcow2  20G
+qemu-img create -f  qcow2  hdisk0.qcow2  20G
 ```
 ## 4 - CREATE the AIX VM using the qemu binary
 ### Remember to change cpu, memory and file names to the ones you specified
 ```
-root@host:/dir#qemu-system-ppc64 -cpu POWER9 -smp 4 \  
+qemu-system-ppc64 -cpu POWER9 -smp 4 \  
 -M pseries,ic-mode=xics -m 16384 -serial stdio \
 -drive file=hdisk0.qcow2,if=none,id=drive-virtio-disk0 \   
 -device virtio-scsi-pci,id=scsi \
@@ -74,26 +74,26 @@ root@host:/dir#qemu-system-ppc64 -cpu POWER9 -smp 4 \
 
 ### Create TAP interface
 ```
-root@host:/dir#ip tuntap add dev tap0 mode tap
+ip tuntap add dev tap0 mode tap
 ```
 ### Enable proxy_arp on both devices (the tap device and your LAN/WLAN interface)
 ```
-root@host:/dir#echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
+echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
 
-root@host:/dir#echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp   
+echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp   
 ```
 
 ### Configure the IP accordingly with your network
 ```
-root@host:/dir#ip addr add 192.168.100.12 dev tap0
+ip addr add 192.168.100.12 dev tap0
 
-root@host:/dir#ip link set up tap0
+ip link set up tap0
 
-root@host:/dir#ip link set up dev tap0 promisc on
+ip link set up dev tap0 promisc on
 
 root@host:/dir#ip route add 192.168.100.200 dev tap0
 
-root@host:/dir#arp -Ds 192.168.100.200 wlp6s0f1u4 pub  
+arp -Ds 192.168.100.200 wlp6s0f1u4 pub  
 ```
 ### We will not be covering Linux tap configurations over here, if you wanna get deeper  chatGPT and Google is your friend  :)
 
@@ -104,8 +104,8 @@ root@host:/dir#arp -Ds 192.168.100.200 wlp6s0f1u4 pub
 
 ### Go to /sbin/helpers/jfs2 and empty the file fsck64 :
 ```
-root@host:/dir#cd /sbin/helpers/jfs2
-root@host:/dir#> fsck64
+cd /sbin/helpers/jfs2
+> fsck64
 ```
 ### Edit the fsck64 file with the following lines:
 ```
@@ -115,13 +115,13 @@ exit 0
 ```
 ### Save and quit the file.
 ```
-root@host:/dir#sync;sync
+sync;sync
 
-root@host:/dir#halt
+halt
 ```
 ## 7 -  Boot from the disk and finish the configuration
 
-### You will have to choose console, languages, terminal and set root password once that is done you will have an AIX system ready to do any necessary test.
+### You will have to choose console, languages, terminal and set root password. Once that is done you will have an AIX system ready to do any necessary test.
 ### Here is the final Qemu line so you can boot from the disk :
 ```
 qemu-system-ppc64 -cpu POWER9 -smp 4 \
