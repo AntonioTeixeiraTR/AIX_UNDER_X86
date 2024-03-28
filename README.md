@@ -48,13 +48,14 @@ root@ryzen9:/mnt#
 qemu-img create -f  qcow2  hdisk0.qcow2  20G
 
 # 4 - CREATE the AIX VM using the qemu binary
+# Remember to change cpu, memory and file names to the ones you specified
 
-qemu-system-ppc64 -cpu POWER9 -smp 4 \  <---- have in mind I have plenty CPU and memory you need to adjust values to what you have.
+qemu-system-ppc64 -cpu POWER9 -smp 4 \  
 -M pseries,ic-mode=xics -m 16384 -serial stdio \
--drive file=hdisk0.qcow2,if=none,id=drive-virtio-disk0 \   <----- The disk file name needs to be the name you created in step 3
+-drive file=hdisk0.qcow2,if=none,id=drive-virtio-disk0 \   
 -device virtio-scsi-pci,id=scsi \
 -device scsi-hd,drive=drive-virtio-disk0 \
--cdrom AIX_Install_7.2.5.6_DVD_1.iso \     <----- You need to change the iso to your iso file name
+-cdrom AIX_Install_7.2.5.6_DVD_1.iso \     
 -prom-env "boot-command=boot cdrom:" \
 -prom-env "input-device=/vdevice/vty@71000000" \
 -prom-env "output-device=/vdevice/vty@71000000"
