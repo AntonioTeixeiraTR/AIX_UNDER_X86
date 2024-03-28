@@ -20,7 +20,7 @@ Steps to create an AIX vm emulated under Qemu Linux Virtual Machine
   	root@ryzen9:/mnt# rpm -qa | grep -i qemu | grep -i ppc
   	qemu-user-static-ppc-8.2.2-1.fc41.x86_64  
 
-### root@ryzen9:/mnt# neofetch
+### root@host:/dir# neofetch
              .',;::::;,'.                root@ryzen9
          .';:cccccccccccc:;,.            -----------
       .;cccccccccccccccccccccc;.         OS: Fedora Linux 41 (KDE Plasma Prerelease) x86_64
@@ -45,12 +45,12 @@ root@ryzen9:/mnt#
 
 ## 3 -  Create a file to be the DISK of your AIX system
 
-qemu-img create -f  qcow2  hdisk0.qcow2  20G
+root@host:/dir#qemu-img create -f  qcow2  hdisk0.qcow2  20G
 
 ## 4 - CREATE the AIX VM using the qemu binary
 ### Remember to change cpu, memory and file names to the ones you specified
 
-qemu-system-ppc64 -cpu POWER9 -smp 4 \  
+root@host:/dir#qemu-system-ppc64 -cpu POWER9 -smp 4 \  
 -M pseries,ic-mode=xics -m 16384 -serial stdio \
 -drive file=hdisk0.qcow2,if=none,id=drive-virtio-disk0 \   
 -device virtio-scsi-pci,id=scsi \
@@ -71,26 +71,26 @@ At this point we are creating it without network configuration and booting from 
 ## 5 - You can create a Linux interface to have access through SSH
 
 ### Create TAP interface
-ip tuntap add dev tap0 mode tap
+root@host:/dir#ip tuntap add dev tap0 mode tap
 
 ### Enable proxy_arp on both devices (the tap device and your LAN/WLAN interface)
 
-echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
+root@host:/dir#echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
 
-echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp   
+root@host:/dir#echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp   
 
 
 ### Configure the IP accordingly with your network
 
-ip addr add 192.168.100.12 dev tap0
+root@host:/dir#ip addr add 192.168.100.12 dev tap0
 
-ip link set up tap0
+root@host:/dir#ip link set up tap0
 
-ip link set up dev tap0 promisc on
+root@host:/dir#ip link set up dev tap0 promisc on
 
-ip route add 192.168.100.200 dev tap0
+root@host:/dir#ip route add 192.168.100.200 dev tap0
 
-arp -Ds 192.168.100.200 wlp6s0f1u4 pub  
+root@host:/dir#arp -Ds 192.168.100.200 wlp6s0f1u4 pub  
 
 ### We will not be covering Linux tap configurations over here, if you wanna get deeper  chatGPT and Google is your friend  :)
 
@@ -101,14 +101,19 @@ arp -Ds 192.168.100.200 wlp6s0f1u4 pub
 
 ### Go to /sbin/helpers/jfs2 and empty the file fsck64 :
 
-cd /sbin/helpers/jfs2
-> fsck64
+root@host:/dir#cd /sbin/helpers/jfs2
+root@host:/dir#> fsck64
 ### Edit the fsck64 file with the following lines:
+
 #!/bin/ksh
+
 exit 0
-Save and quit the file.
-sync;sync
-halt
+
+### Save and quit the file.
+
+root@host:/dir#sync;sync
+
+root@host:/dir#halt
 
 ## 7 -  Boot from the disk and finish the configuration
 
