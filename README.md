@@ -21,6 +21,7 @@ Steps to create an AIX vm emulated under Qemu Linux Virtual Machine
   	qemu-user-static-ppc-8.2.2-1.fc41.x86_64  
 
 ### root@host:/dir# neofetch
+```
              .',;::::;,'.                root@ryzen9
          .';:cccccccccccc:;,.            -----------
       .;cccccccccccccccccccccc;.         OS: Fedora Linux 41 (KDE Plasma Prerelease) x86_64
@@ -41,7 +42,8 @@ cccccccc;.:odl:.;cccccccccccccc:,.
 .:cccccccccccccccccccccc:;,..
   '::cccccccccccccc::;,.
 
-root@ryzen9:/mnt#
+root@host:/dir#
+```
 
 ## 3 -  Create a file to be the DISK of your AIX system
 
