@@ -149,7 +149,7 @@ stopsrc -s pfcdaemon
 chdev -l en0 -a netaddr=192.168.100.200 -a netmask=255.255.255.0 -a state=up   <-------- again, remember to change ip addresses to yours ip 
 ```
 ### Ps.: you can make this AIX access the internet if you configure your Linux network  ( tap and external NIC ) to be on a bridge, but this is out of the scope of this guide
-### Ps.2:  the ps command could crash dump your system, so remember to use TOP  - not all binaries work well under the qemu.
+### Ps.2:  the ps command could crash dump your system, so remember to use TOPAS  - not all binaries work well under the qemu.
 
 
 
