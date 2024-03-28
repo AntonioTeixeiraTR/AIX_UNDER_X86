@@ -75,7 +75,7 @@ ip tuntap add dev tap0 mode tap
 # Enable proxy_arp on both devices (the tap device and your LAN/WLAN interface)
 
 echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
-echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp     <---- Remember to change the interface to your NIC name
+echo 1 > /proc/sys/net/ipv4/conf/wlp6s0f1u4/proxy_arp     <---- Remember to change the interface
 
 # Configure the IP accordingly with your network
 
