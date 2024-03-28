@@ -98,7 +98,7 @@ Go to /sbin/helpers/jfs2 and empty the file fsck64 :
 
 cd /sbin/helpers/jfs2
 > fsck64
-Edit the fsck64 file with the following lines:
+# Edit the fsck64 file with the following lines:
 #!/bin/ksh
 exit 0
 Save and quit the file.
@@ -107,7 +107,7 @@ halt
 
 # 7 -  Boot from the disk and finish the configuration
 
-you will have to choose console, languages, terminal and set root password once that is done you will have an AIX system ready to do any necessary test.
+# You will have to choose console, languages, terminal and set root password once that is done you will have an AIX system ready to do any necessary test.
 
 Here is the final Qemu line so you can boot from the disk :
 
