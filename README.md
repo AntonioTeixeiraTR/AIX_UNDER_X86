@@ -63,9 +63,9 @@ At this point we are creating it without network configuration and booting from 
 
 # 4.1 Follow the Steps and Menus to perform an instalation of the system 
 
-# Be sure to choose to install SSH in the Menu options to avoid the need to do it later
-# Never do a Ctrl+C cause it will make your system to crash.
-# Be absolutly patience - even if you have tons of resources this will be an emulated system, therefore it will take time to complete actions.
+ Be sure to choose to install SSH in the Menu options to avoid the need to do it later
+ Never do a Ctrl+C cause it will make your system to crash.
+ Be absolutly patience - even if you have tons of resources this will be an emulated system, therefore it will take time to complete actions.
 
 # 5 - You can create a Linux interface to have access through SSH
 
